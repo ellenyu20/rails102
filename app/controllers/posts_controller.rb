@@ -27,9 +27,9 @@ class PostsController < ApplicationController
   end
 
   def update
-    @group = Group.find(params[:group_id])
+    #@group = Group.find(params[:group_id])
     @post = Post.find(params[:id])
-    #以上为路径
+    #不需要第一句，原因待确认
 
     if @post.update(post_params)
       redirect_to account_posts_path, notice: "Update Success"
@@ -38,7 +38,15 @@ class PostsController < ApplicationController
       render :edit
       #校验不为空
     end
+
+  def destroy
+      #@group = Group.find(params[:group_id])
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:alert] = "Post deleted"
+    redirect_to account_posts_path
   end
+end
 
   private
 
